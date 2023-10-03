@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/MSkrzypietz/proximity-service/location-service/geohash"
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
@@ -26,7 +27,7 @@ func main() {
 			fmt.Println(err)
 			return
 		}
-		res.Write([]byte("Unimplemented"))
+		res.Write([]byte(geohash.CalcGeohash(search.Latitude, search.Longitude)))
 	})
 	log.Fatal(http.ListenAndServe(":3001", router))
 }
